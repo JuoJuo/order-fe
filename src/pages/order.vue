@@ -1,0 +1,257 @@
+<template>
+  <!-- 导航条 -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed " data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Easy to order</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="../index.html">Home<span class="sr-only">(current)</span></a></li>
+          <li><a href="login.vue">Login</a></li>
+          <li><a href="register.vue">Register</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav>
+  <!-- 页头 -->
+  <div class="page-header damu-page-header">
+    <h2>My order</h2>
+  </div>
+  <!-- 主体 -->
+  <div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation"><a href="#unfinished" aria-controls="unfinished" role="tab"
+                                 data-toggle="tab">Unfinished</a></li>
+      <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab"
+                                                data-toggle="tab">All</a></li>
+      <li role="presentation"><a href="#cancelled" aria-controls="cancelled" role="tab"
+                                 data-toggle="tab">Cancelled</a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active damu-order-tabpanel" id="unfinished">
+        <div class="damu-order-wrap">
+          <span class="damu-order-status">Making</span>
+          <table class="table damu-table">
+            <tr>
+              <th>Goods</th>
+              <th>Number</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+            <tr>
+              <td>
+                <img src="../images/burger2.jpg" class="damu-order-img">
+              </td>
+              <td>1</td>
+              <td>10</td>
+              <td>10</td>
+            </tr>
+          </table>
+          <div class="row">
+            <div class="col-md-3 col-xs-1"></div>
+            <div class="col-md-6 col-xs-10">
+              <ul class="list-group">
+                <li class="list-group-item ">
+                  <span class="damu-my-infoName">Order number</span>
+                  <span class="damu-my-info">202008261335001</span>
+                </li>
+                <li class="list-group-item ">
+                  <span class="damu-my-infoName">Time of order</span>
+                  <span class="damu-my-info">08-26-2020 13:35</span>
+                </li>
+                <li class="list-group-item ">
+                  <span class="damu-my-infoName">Scheduled pick-up time</span>
+                  <span class="damu-my-info">08-26-2020 13:45</span>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-xs-1"></div>
+          </div>
+          <div class="clearfix">
+            <p class="damu-order-status">2 items in total £<span>5</span></p>
+            <p class="damu-order-status">Ticket:<span>123456</span></p>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="all">
+        <div class="damu-order-wrap">
+          <span class="damu-order-status">Taking</span>
+          <table class="table damu-table">
+            <tr>
+              <th>Goods</th>
+              <th>Number</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+            <tr>
+              <td>
+                <img src="../images/burger2.jpg" class="damu-order-img">
+              </td>
+              <td>1</td>
+              <td>10</td>
+              <td>10</td>
+            </tr>
+          </table>
+          <div class="row">
+            <div class="col-md-3 col-xs-1"></div>
+            <div class="col-md-6 col-xs-10">
+              <ul class="list-group">
+                <li class="list-group-item ">
+                  <span class="damu-my-infoName">Order number</span>
+                  <span class="damu-my-info">202008261335001</span>
+                </li>
+                <li class="list-group-item ">
+                  <span class="damu-my-infoName">Time of order</span>
+                  <span class="damu-my-info">08-26-2020 13:35</span>
+                </li>
+                <li class="list-group-item ">
+                  <span class="damu-my-infoName">Scheduled pick-up time</span>
+                  <span class="damu-my-info">08-26-2020 13:45</span>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-xs-1"></div>
+          </div>
+          <div class="clearfix">
+            <p class="damu-order-status">2 items in total £<span>5</span></p>
+            <p class="damu-order-status">Ticket:<span>123456</span></p>
+          </div>
+        </div>
+        <div class="damu-order-wrap">
+          <span class="damu-order-status">Making</span>
+          <table class="table damu-table">
+            <tr>
+              <th>Goods</th>
+              <th>Number</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+            <tr>
+              <td>
+                <img src="../images/burger2.jpg" class="damu-order-img">
+              </td>
+              <td>1</td>
+              <td>10</td>
+              <td>10</td>
+            </tr>
+          </table>
+          <div class="row">
+            <div class="col-md-3 col-xs-1"></div>
+            <div class="col-md-6 col-xs-10">
+              <ul class="list-group">
+                <li class="list-group-item ">
+                  <span class="damu-my-infoName">Order number</span>
+                  <span class="damu-my-info">202008261335001</span>
+                </li>
+                <li class="list-group-item ">
+                  <span class="damu-my-infoName">Time of order</span>
+                  <span class="damu-my-info">08-26-2020 13:35</span>
+                </li>
+                <li class="list-group-item ">
+                  <span class="damu-my-infoName">Scheduled pick-up time</span>
+                  <span class="damu-my-info">08-26-2020 13:45</span>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-xs-1"></div>
+          </div>
+          <div class="clearfix">
+            <p class="damu-order-status">2 items in total £<span>5</span></p>
+            <p class="damu-order-status">Ticket:<span>123456</span></p>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="cancelled">
+        <div class="damu-order-wrap">
+          <span class="damu-order-status">Cancelled</span>
+          <table class="table damu-table">
+            <tr>
+              <th>Goods</th>
+              <th>Number</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+            <tr>
+              <td>
+                <img src="../images/burger2.jpg" class="damu-order-img">
+              </td>
+              <td>1</td>
+              <td>10</td>
+              <td>10</td>
+            </tr>
+          </table>
+          <div class="row">
+            <div class="col-md-3 col-xs-1"></div>
+            <div class="col-md-6 col-xs-10">
+              <ul class="list-group">
+                <li class="list-group-item ">
+                  <span class="damu-my-infoName">Order number</span>
+                  <span class="damu-my-info">202008261335001</span>
+                </li>
+                <li class="list-group-item ">
+                  <span class="damu-my-infoName">Time of order</span>
+                  <span class="damu-my-info">08-26-2020 13:35</span>
+                </li>
+                <li class="list-group-item ">
+                  <span class="damu-my-infoName">Scheduled pick-up time</span>
+                  <span class="damu-my-info">08-26-2020 13:45</span>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-xs-1"></div>
+          </div>
+          <div class="clearfix">
+            <p class="damu-order-status">2 items in total £<span>5</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 底部导航栏 -->
+  <nav class="navbar navbar-inverse navbar-fixed-bottom ">
+    <div class="container-fluid">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-3 col-sm-3 col-xs-3 damu-bottomNav">
+          <a href="../index.html">Menu
+            <span class="glyphicon glyphicon-list-alt"></span>
+          </a>
+        </div>
+        <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
+          <a href="../pages/order.html">Order
+            <span class="glyphicon glyphicon-book"></span>
+          </a>
+        </div>
+        <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
+          <a href="cart.vue">Cart
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+          </a>
+        </div>
+        <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
+          <a href="myAccount.vue">My
+            <span class="glyphicon glyphicon-user"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</template>
+<script>
+  export default {
+    name: 'Order',
+    components: {}
+  }
+</script>

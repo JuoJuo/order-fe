@@ -1,0 +1,166 @@
+<template>
+  <!-- 导航条 -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed " data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Easy to order</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="../index.html">Home<span class="sr-only">(current)</span></a></li>
+          <li><a href="login.vue">Login</a></li>
+          <li><a href="register.vue">Register</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav>
+  <!-- 页头 -->
+  <div class="page-header damu-page-header">
+    <h2>Pay</h2>
+  </div>
+  <!-- 主体 -->
+  <div class="container">
+    <!-- Nav tabs -->
+    <div class="row">
+      <div class="col-md-3 col-sm-3 col-xs-1"></div>
+      <div class="col-md-6 col-sm-6 col-xs-10 clearfix">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#now" aria-controls="now" role="tab"
+                                                    data-toggle="tab">Now</a>
+          </li>
+          <li role="presentation"><a href="#reserve" aria-controls="reserve" role="tab"
+                                     data-toggle="tab">Reserve</a>
+          </li>
+        </ul>
+        <!-- common -->
+        <ul class="list-group">
+          <li class="list-group-item ">
+            <span class="damu-pay-infoName">Reserved user</span>
+            <span class="damu-pay-info">Ailsa</span>
+          </li>
+          <li class="list-group-item ">
+            <span class="damu-pay-infoName">Reserved Phone</span>
+            <span class="damu-pay-info">07529936177</span>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="now">
+            <ul class="list-group">
+              <li class="list-group-item ">
+                <span class="damu-pay-infoName">Pick-up time</span>
+                <span class="damu-pay-info">13:45<button class="damu-pay-btn">></button></span>
+              </li>
+            </ul>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="reserve">
+            <ul class="list-group">
+              <li class="list-group-item ">
+                <span class="damu-pay-infoName">Pick-up time</span>
+                <span class="damu-pay-info">To 05-09-2020<button class="damu-pay-btn">></button></span>
+                <span class="damu-pay-info">From 01-09-2020<button class="damu-pay-btn">></button></span>
+                <span class="damu-pay-info">13:45<button class="damu-pay-btn">></button></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <span>How to take meals?</span>
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#eatin" aria-controls="eatin" role="tab"
+                                                    data-toggle="tab">Eat in</a>
+          </li>
+          <li role="presentation"><a href="#takeout" aria-controls="takeout" role="tab"
+                                     data-toggle="tab">Take out</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="eatin">
+            <ul class="list-group">
+              <li class="list-group-item ">
+                <span class="damu-pay-infoName">Have you arrived?</span>
+              </li>
+              <li class="list-group-item ">
+                <span class="damu-pay-infoName">Table number</span>
+                <span class="damu-pay-info">13<button class="damu-pay-btn">></button></span>
+              </li>
+            </ul>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="takeout">
+            <ul class="list-group">
+              <li class="list-group-item ">
+                <span class="damu-pay-infoName">Package fee:</span>
+                <span class="damu-pay-info">10p</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <ul class="list-group" style="margin-bottom: 60px;">
+          <li class="list-group-item ">
+            <span class="damu-pay-infoName">Payment method</span>
+            <span class="damu-pay-info">card<button class="damu-pay-btn">></button></span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-1"></div>
+    </div>
+  </div>
+  <!-- 结算栏 -->
+  <div class="panel panel-default damu-bottom-wrap">
+    <div class="panel-body bottom-menu-include">
+      <div class="col-md-3 col-sm-3 col-xs-3 check-all-bottom bottom-menu">
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-3 bottom-menu">
+        <span>Total:<span id="selectGoodsMoney">0.00</span></span>
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-3 bottom-menu">
+        <button class="btn"><span id="payMulty"><a href="../pages/pay.html">Pay</a></span></button>
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-3 bottom-menu">
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部导航栏 -->
+  <nav class="navbar navbar-inverse navbar-fixed-bottom ">
+    <div class="container-fluid">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-3 col-sm-3 col-xs-3 damu-bottomNav">
+          <a href="../index.html">Menu
+            <span class="glyphicon glyphicon-list-alt"></span>
+          </a>
+        </div>
+        <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
+          <a href="order.vue">Order
+            <span class="glyphicon glyphicon-book"></span>
+          </a>
+        </div>
+        <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
+          <a href="cart.vue">Cart
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+          </a>
+        </div>
+        <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
+          <a href="myAccount.vue">My
+            <span class="glyphicon glyphicon-user"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</template>
+<script>
+  export default {
+    name: 'Pay',
+    components: {}
+  }
+</script>

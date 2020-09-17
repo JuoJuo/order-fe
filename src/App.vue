@@ -20,8 +20,8 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="active"><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
-            <li><a href="./pages/login.html">Login</a></li>
-            <li><a href="./pages/register.html">Register</a></li>
+            <li><a href="pages/login.vue">Login</a></li>
+            <li><a href="pages/register.vue">Register</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
@@ -73,7 +73,7 @@
           <div class="container">
             <div class="row">
               <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
-                <div class="list-group" id="Menu">
+                <div class="list-group" id="Menu1">
                   <a href="#" class="list-group-item active">Single item</a>
                   <a href="#" class="list-group-item">Meal</a>
                   <a href="#" class="list-group-item">Snack</a>
@@ -99,31 +99,6 @@
                   </a>
                 </div>
               </div>
-              <!-- <div class=" col-lg-10 col-md-10 col-sm-8 col-xs-8">
-                  <div class="container">
-                      <div class="row damu-details">
-                          <div class="col-xs-4 col-sm-4 col-md-4">
-                              <a href="#">
-                                  <img src="./images/burger2.jpg" class="damu-img">
-                              </a>
-                          </div>
-                          <div class="col-xs-8 col-sm-8 col-md-8">
-                              <div class="damu-intro">
-                                  <a href="#">
-                                      <h4>Chicken burger </h4>
-                                      <span>Chicken &nbspChicken burgerChicken burgerChicken burger</span>
-                                  </a>
-                              </div>
-                              <div>
-                                  <p class="damu-price">£2.5</p>
-                                  <a href="javascript:;" class="damu-cart">
-                                      <span class="glyphicon glyphicon-shopping-cart"></span>
-                                  </a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div> -->
             </div>
           </div>
         </div>
@@ -148,7 +123,7 @@
           <!---写评论------>
           <form role="form">
             <div class="form-group">
-              <label for="name">Reviews</label>
+              <label>Reviews</label>
               <input type="text" class="form-control" placeholder="Write your review....">
             </div>
           </form>
@@ -167,17 +142,17 @@
             </a>
           </div>
           <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
-            <a href="./pages/order.html">Order
+            <a href="pages/order.vue">Order
               <span class="glyphicon glyphicon-book"></span>
             </a>
           </div>
           <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
-            <a href="./pages/cart.html">Cart
+            <a href="pages/cart.vue">Cart
               <span class="glyphicon glyphicon-shopping-cart"></span>
             </a>
           </div>
           <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
-            <a href="./pages/myAccount.html">My
+            <a href="pages/myAccount.vue">My
               <span class="glyphicon glyphicon-user"></span>
             </a>
           </div>
@@ -188,23 +163,9 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
   components: {
-    HelloWorld
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
