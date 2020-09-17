@@ -1,125 +1,13 @@
 <template>
   <div id="app">
-
-    <!--<login></login>-->
-    <!--<register></register>-->
-    <!--<resetPasword></resetPasword>-->
-
-    <!-- 导航条 -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed " data-toggle="collapse"
-                  data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Easy to order</a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
-            <li><a href="pages/login.vue">Login</a></li>
-            <li><a href="pages/register.vue">Register</a></li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container -->
-    </nav>
-
-    <!-- 轮播图 -->
-    <div v-if="false" id="carousel-example-generic" class="carousel slide damu-carousel" data-ride="carousel" data-interval="2000">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-      </ol>
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <img src="./images/burger1.jpg" alt="Burger">
-        </div>
-        <div class="item">
-          <img src="./images/burger2.jpg" alt="Burger">
-        </div>
-        <div class="item">
-          <img src="./images/chips.jpg" alt="Chips">
-        </div>
-      </div>
-
-      <!-- Controls -->
-      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-
-    <!--<Cart></Cart>-->
-    <!--<order></order>-->
-    <!--<myAccount></myAccount>-->
-    <!--<pay></pay>-->
-
-    <!-- 底部导航栏 -->
-    <nav class="navbar navbar-inverse navbar-fixed-bottom ">
-
-      <div class="container-fluid">
-        <div class="row justify-content-center align-items-center">
-          <div class="col-md-3 col-sm-3 col-xs-3 damu-bottomNav">
-            <a href="#Menu">Menu
-              <span class="glyphicon glyphicon-list-alt"></span>
-            </a>
-          </div>
-          <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
-            <a href="pages/order.vue">Order
-              <span class="glyphicon glyphicon-book"></span>
-            </a>
-          </div>
-          <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
-            <a href="pages/cart.vue">Cart
-              <span class="glyphicon glyphicon-shopping-cart"></span>
-            </a>
-          </div>
-          <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
-            <a href="pages/myAccount.vue">My
-              <span class="glyphicon glyphicon-user"></span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import Cart from './pages/cart';
-  import login from './pages/login';
-  import myAccount from './pages/myAccount';
-  import order from './pages/order';
-  import pay from './pages/pay';
-  import register from './pages/register';
-  import resetPasword from './pages/resetPasword';
-  import menu from './pages/menu';
 export default {
   name: 'App',
   components: {
-    Cart,
-    login,
-    myAccount,
-    register,
-    order,
-    resetPasword,
-    pay,
-    menu,
   }
 }
 </script>

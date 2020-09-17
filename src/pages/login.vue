@@ -36,7 +36,7 @@
                 <a href="register.vue">Register</a>
               </label>
               <label class=" label-content-color custom-form-label2">
-                <a href="resetPasword.vue">Forgot password?</a>
+                <a href="resetPassword.vue">Forgot password?</a>
               </label>
             </div>
           </form>
