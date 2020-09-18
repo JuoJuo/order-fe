@@ -1,6 +1,6 @@
 body{
     font-family: 'Times New Roman', Times, serif;
-    padding-bottom: 70px; 
+    /*padding-bottom: 70px; */
 }
 a{
     color:#b89f6c
@@ -57,7 +57,7 @@ img{
 
 @media only screen and (max-width: 768px) {
 .damu-carousel{
-    height: 200px; 
+    height: 200px;
 }
 }
 /* 主体部分 */
@@ -297,7 +297,7 @@ height: 40px;
 }
 .damu-order-wrap{
     margin-top:20px;
-} 
+}
 
 /* pay */
 .damu-pay-btn{

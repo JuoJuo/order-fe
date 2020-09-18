@@ -1,5 +1,18 @@
 <template>
   <div>
+    <nut-popup :style="{ padding: '30px 50px' }" v-model="show">
+      <!---写评论------>
+      <div style="width: 100%">
+        <nut-textinput
+          v-model="myComment"
+          label="Write Reviews："
+          placeholder="Write your review...."
+          :clearBtn="true"
+        />
+
+        <nut-button small style="float: right;margin-top: 10px;" @click="addComment">OK</nut-button>
+      </div>
+    </nut-popup>
     <!-- 轮播图 -->
     <div id="carousel-example-generic" class="carousel slide damu-carousel" data-ride="carousel" data-interval="2000">
       <!-- Indicators -->
@@ -43,69 +56,126 @@
           <!-- 主体 -->
           <div class="container">
             <div class="row">
-              <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+              <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3" style="padding-left: 0;height: calc(100vh - 340px)">
                 <div class="list-group" id="Menu1">
-                  <a href="#" class="list-group-item active">Single item</a>
-                  <a href="#" class="list-group-item">Meal</a>
-                  <a href="#" class="list-group-item">Snack</a>
-                  <a href="#" class="list-group-item">Drinks</a>
+                  <a @click="changeSubTab('Single')" class="list-group-item" :class="tabName ==='Single' ? 'active' : ''">Single item</a>
+                  <a @click="changeSubTab('Meal')" href="#" class="list-group-item" :class="tabName ==='Meal' ? 'active' : ''">Meal</a>
+                  <a @click="changeSubTab('Snack')" href="#" class="list-group-item" :class="tabName ==='Snack' ? 'active' : ''">Snack</a>
+                  <a @click="changeSubTab('Drinks')" href="#" class="list-group-item" :class="tabName ==='Drinks' ? 'active' : ''">Drinks</a>
                 </div>
               </div>
-              <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
-                <a href="#">
-                  <img src="../images/burger2.jpg" class="damu-img">
-                </a>
-              </div>
-              <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6">
-                <div class="damu-intro">
+              <template v-for="g in filteredGoods">
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                   <a href="#">
-                    <h4>Chicken burger </h4>
-                    <span>Chicken &nbspChicken burgerChicken burgerChicken burger</span>
+                    <img src="../images/burger2.jpg" class="damu-img">
                   </a>
                 </div>
-                <div>
-                  <p class="damu-price">£2.5</p>
-                  <a href="javascript:;" class="damu-cart">
-                    <span class="glyphicon glyphicon-shopping-cart"></span>
-                  </a>
+                <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6">
+                  <div class="damu-intro">
+                    <a href="#">
+                      <h4>{{ g.name }}</h4>
+                      <span>{{ g.desc }}</span>
+                    </a>
+                  </div>
+                  <div>
+                    <p class="damu-price">{{ g.price }}</p>
+                    <a class="damu-cart" @click="addToCart(g)">
+                      <span class="glyphicon glyphicon-shopping-cart"></span>
+                    </a>
+                    <a @click="openComment(g)">
+                      <span class="glyphicon glyphicon glyphicon-comment"></span>
+                    </a>
+                  </div>
                 </div>
-              </div>
+              </template>
             </div>
           </div>
         </div>
         <div role="tabpanel" class="tab-pane damu-order-tabpanel" id="review">
           <table class="table">
-            <tr class="success">
-              <td colspan="2">Product: <span>Chips</span></td>
-            </tr>
-            <tr>
-              <td>
-                <img style="width:20px" src="../images/photo.jpg">
-              </td>
-              <td>User name: <span>Ailsa</span></td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <p>It is very delicious.It is very delicious.It is very delicious
-                </p>
-              </td>
-            </tr>
+            <template v-for="c in comments">
+              <tr class="success">
+                <td rowspan="3" width="20%">
+                  <img src="../images/photo.jpg">
+                </td>
+                <td>Product: <span>{{ c.goods.name }}</span></td>
+              </tr>
+              <tr>
+                <td>User name: <span>{{ c.guest.username }}</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <p>{{ c.comment }}</p>
+                </td>
+              </tr>
+            </template>
           </table>
-          <!---写评论------>
-          <form role="form">
-            <div class="form-group">
-              <label>Reviews</label>
-              <input type="text" class="form-control" placeholder="Write your review....">
-            </div>
-          </form>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+  import axios from 'axios';
+
   export default {
     name: 'Menu',
-    components: {}
+    props: {
+      goods: {
+        type: Array,
+        default: () => [],
+      },
+      comments: {
+        type: Array,
+        default: () => [],
+      },
+      foodInCart: {
+        type: Array,
+        default: () => [],
+      },
+      getComments: {
+        type: Function,
+        default: () => () => {},
+      },
+      addToCart: {
+        type: Function,
+        default: () => () => {},
+      }
+    },
+    data() {
+      return {
+        tabName: 'Single',
+        myComment: '',
+        show: false,
+        currentGoods: {},
+      };
+    },
+    computed:{
+      filteredGoods() {
+        return this.goods.filter(({ type }) => type === this.tabName || !type);
+      }
+    },
+    methods: {
+      openComment(currentGoods){
+        this.show = true;
+        this.currentGoods = currentGoods;
+      },
+      changeSubTab(tabName) {
+        this.tabName = tabName;
+      },
+      addComment() {
+        const param = {
+          comment: this.myComment,
+          time: new Date(),
+          guest: JSON.parse(localStorage.getItem('user'))._id,
+          goods: this.currentGoods._id,
+        };
+        axios.post('/comments', param)
+          .then(() => {
+            this.show = false;
+            this.getComments();
+          })
+      },
+    },
   }
 </script>

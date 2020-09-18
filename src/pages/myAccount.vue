@@ -17,6 +17,11 @@
             <li class="list-group-item ">
               <span class="damu-my-infoName">User name</span>
               <span class="damu-my-info">Ailsa</span>
+              <nut-textinput
+                v-model="uname"
+                :clearBtn="true"
+                :disabled="false"
+              />
             </li>
             <li class="list-group-item ">
               <span class="damu-my-infoName">Phone number</span>
@@ -25,6 +30,11 @@
             <li class="list-group-item ">
               <span class="damu-my-infoName">Email</span>
               <span class="damu-my-info">123456@qq.com</span>
+              <nut-textinput
+                v-model="email"
+                :clearBtn="true"
+                :disabled="false"
+              />
             </li>
           </ul>
           <div class="col-md-6 col-xs-6">
@@ -32,14 +42,14 @@
               <button class="btn  btn-default damu-form-button" type="button">Edit</button>
             </div>
             <div class="damu-my-button-wrap">
-              <a href="login.vue">
+              <a @click="logout">
                 <button class="btn  btn-default damu-form-button" type="button">
                   Switch account
                 </button>
               </a>
             </div>
             <div class="damu-my-button-wrap">
-              <button class="btn  btn-default damu-form-button" type="button">Log out</button>
+              <button class="btn  btn-default damu-form-button" type="button" @click="logout">Log out</button>
             </div>
           </div>
         </div>
@@ -50,7 +60,17 @@
 
 <script>
   export default {
-    name: 'Cart',
-    components: {}
+    name: 'myAccount',
+    data(){
+      return {
+
+      };
+    },
+    methods: {
+      logout() {
+        localStorage.clear();
+        this.$router.push({ name: 'login' });
+      }
+    }
   }
 </script>

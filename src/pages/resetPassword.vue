@@ -8,28 +8,31 @@
           <h2>Reset Password</h2>
           <form>
             <div class="form-group">
-              <!-- <span class="damu-span-input-label-wrap"> -->
               <label class="damu_input_label">
-                <i class="fa fa-lock"></i>
+                <i class="glyphicon glyphicon-phone"></i>
               </label>
-              <input class="damu_input_field" type="password" placeholder="New password">
-              <!-- </span> -->
+              <input class="damu_input_field" v-model="phone" type="text" placeholder="Phone number">
+            </div>
+
+            <div class="form-group">
+              <label class="damu_input_label">
+                <i class="glyphicon glyphicon-lock"></i>
+              </label>
+              <input class="damu_input_field" type="password" v-model="password" placeholder="New password">
             </div>
             <div class="form-group">
-              <!-- <span class="damu-span-input-label-wrap"> -->
               <label class="damu_input_label">
-                <i class="fa fa-lock"></i>
+                <i class="glyphicon glyphicon-lock"></i>
               </label>
-              <input class="damu_input_field" type="password" placeholder=" Confirm Password">
-              <!-- </span> -->
+              <input class="damu_input_field" type="password" v-model="rePassword" placeholder=" Confirm Password">
             </div>
 
             <div class="damu-button-wrap">
-              <button class="btn  btn-default damu-form-button" type="button">Reset</button>
+              <button class="btn  btn-default damu-form-button" @click="reset" type="button">Reset</button>
             </div>
             <div class="form-group">
               <label class=" label-content-color custom-form-label2">
-                <a href="login.vue">Go to Login</a>
+                <a @click="gotoLogin">Go to Login</a>
               </label>
             </div>
           </form>
@@ -41,8 +44,40 @@
   </div>
 </template>
 <script>
+  import axios from 'axios';
+
   export default {
-    name: 'resetPasword',
-    components: {}
+    name: 'resetPassword',
+    data() {
+      return {
+        phone: '',
+        password: '',
+        rePassword: '',
+      };
+    },
+    methods: {
+      gotoLogin() {
+        this.$router.push({ name: 'login' })
+      },
+      reset() {
+        if (this.password !== this.rePassword) {
+          alert('two password is different!');
+          return;
+        }
+
+        const param = {
+          phone: this.phone,
+          password: this.password,
+        };
+        axios.put('/guest/resetPassword', param)
+          .then(({ data }) => {
+            if (typeof data !== 'string') {
+              this.$router.push({ name: 'login' });
+            } else {
+              alert(data);
+            }
+          })
+      }
+    },
   }
 </script>

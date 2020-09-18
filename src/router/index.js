@@ -24,13 +24,8 @@ const routes = [
     component: resetPassword,
   },
   {
-    path: '/login',
-    name: 'login',
-    component: Login,
-  },
-  {
     path: '/',
-    name: 'Index',
+    name: 'index',
     component: Index,
   },
 ];

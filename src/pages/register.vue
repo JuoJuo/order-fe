@@ -8,35 +8,29 @@
           <h2>Register</h2>
           <form>
             <div class="form-group">
-              <!-- <span class="damu-span-input-label-wrap"> -->
               <label class="damu_input_label">
-                <i class="fa fa-user"></i>
+                <i class="glyphicon glyphicon-user"></i>
               </label>
-              <input class="damu_input_field" type="text" placeholder="User name">
-              <!-- </span> -->
+              <input class="damu_input_field" v-model="username" type="text" placeholder="User name">
             </div>
             <div class="form-group">
-              <!-- <span class="damu-span-input-label-wrap"> -->
               <label class="damu_input_label">
                 <i class="glyphicon glyphicon-phone"></i>
               </label>
-              <input class="damu_input_field" type="text" placeholder="Phone number">
-              <!-- </span> -->
+              <input class="damu_input_field" v-model="phone" type="text" placeholder="Phone number">
             </div>
             <div class="form-group">
-              <!-- <span class="damu-span-input-label-wrap"> -->
               <label class="damu_input_label">
-                <i class="fa fa-lock"></i>
+                <i class="glyphicon glyphicon-lock"></i>
               </label>
-              <input class="damu_input_field" type="password" placeholder="Password">
-              <!-- </span> -->
+              <input class="damu_input_field" v-model="password" type="password" placeholder="Password">
             </div>
             <div class="damu-button-wrap">
-              <button class="btn  btn-default damu-form-button" type="button">Register</button>
+              <button class="btn  btn-default damu-form-button" type="button" @click="register">Register</button>
             </div>
             <div class="form-group">
               <label class=" label-content-color custom-form-label2">
-                <a href="login.vue">Go to Login</a>
+                <a @click="gotoLogin">Go to Login</a>
               </label>
             </div>
           </form>
@@ -49,8 +43,37 @@
 </template>
 
 <script>
+  import axios from 'axios';
+
   export default {
     name: 'Register',
-    components: {}
+    data() {
+      return {
+        username: '',
+        phone: '',
+        password: '',
+      };
+    },
+    methods: {
+      gotoLogin() {
+        this.$router.push({ name: 'login' })
+      },
+      register() {
+        const param = {
+          username: this.username,
+          phone: this.phone,
+          password: this.password,
+        };
+        axios.post('/guest', param)
+          .then(({ data }) => {
+            if (data._id) {
+              alert('register success!');
+              this.gotoLogin();
+            } else {
+              alert(data);
+            }
+          })
+      }
+    }
   }
 </script>

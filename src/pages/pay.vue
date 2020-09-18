@@ -9,57 +9,93 @@
       <!-- Nav tabs -->
       <div class="row">
         <div class="col-md-3 col-sm-3 col-xs-1"></div>
-        <div class="col-md-6 col-sm-6 col-xs-10 clearfix">
+        <div class="col-md-6 col-sm-6 col-xs-10 clearfix" style="height: 420px;overflow: scroll;width: 100%">
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#now" aria-controls="now" role="tab"
-                                                      data-toggle="tab">Now</a>
-            </li>
-            <li role="presentation"><a href="#reserve" aria-controls="reserve" role="tab"
-                                       data-toggle="tab">Reserve</a>
+                                                      data-toggle="tab">Detail info</a>
             </li>
           </ul>
           <!-- common -->
           <ul class="list-group">
             <li class="list-group-item ">
               <span class="damu-pay-infoName">Reserved user</span>
-              <span class="damu-pay-info">Ailsa</span>
+              <span class="damu-pay-info">{{  user.username }}</span>
             </li>
             <li class="list-group-item ">
               <span class="damu-pay-infoName">Reserved Phone</span>
-              <span class="damu-pay-info">07529936177</span>
+              <span class="damu-pay-info">{{ user.phone }}</span>
+            </li>
+            <li class="list-group-item ">
+              <span class="damu-pay-infoName">Pick-up time</span>
+              <span class="damu-pay-info" @click="switchPickUptime()">
+                <a>Choose Time</a>
+                <span style="margin-left: 8px;">{{ time }}</span>
+              </span>
+              <nut-datepicker
+                :is-visible="pickUptimeShow"
+                type="time"
+                title="Please Choose Time"
+                @close="switchPickUptime()"
+                @choose="timeChoosed"
+                defaultValue="01:07"
+              >
+              </nut-datepicker>
+            </li>
+
+            <li class="list-group-item ">
+              <span class="damu-pay-infoName">Reserve Start Date</span>
+              <span class="damu-pay-info" @click="switchStartDateShow()">
+                <a>Choose Start Date</a>
+                <span style="margin-left: 8px;">{{ startDate }}</span>
+              </span>
+              <nut-datepicker
+                :is-visible="startDateShow"
+                type="date"
+                title="Please Choose Start Date"
+                :is-show-chinese="false"
+                :defaultValue="defaultDate"
+                endDate="2022-12-21"
+                @close="switchStartDateShow"
+                @choose="startChoose"
+              >
+              </nut-datepicker>
+            </li>
+
+            <li class="list-group-item ">
+              <span class="damu-pay-infoName">Reserve End Date</span>
+              <span class="damu-pay-info" @click="switchEndDateShow()">
+                <a>Choose End Date</a>
+                <span style="margin-left: 8px;">{{ endDate }}</span>
+              </span>
+              <nut-datepicker
+                :is-visible="endDateShow"
+                type="date"
+                :defaultValue="defaultDate"
+                endDate="2022-12-21"
+                title="Please Choose End Date"
+                :is-show-chinese="false"
+                @close="switchEndDateShow"
+                @choose="endChoose"
+              >
+              </nut-datepicker>
             </li>
           </ul>
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="now">
-              <ul class="list-group">
-                <li class="list-group-item ">
-                  <span class="damu-pay-infoName">Pick-up time</span>
-                  <span class="damu-pay-info">13:45<button class="damu-pay-btn">></button></span>
-                </li>
-              </ul>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="reserve">
-              <ul class="list-group">
-                <li class="list-group-item ">
-                  <span class="damu-pay-infoName">Pick-up time</span>
-                  <span class="damu-pay-info">To 05-09-2020<button class="damu-pay-btn">></button></span>
-                  <span class="damu-pay-info">From 01-09-2020<button class="damu-pay-btn">></button></span>
-                  <span class="damu-pay-info">13:45<button class="damu-pay-btn">></button></span>
-                </li>
-              </ul>
-            </div>
-          </div>
           <span>How to take meals?</span>
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#eatin" aria-controls="eatin" role="tab"
-                                                      data-toggle="tab">Eat in</a>
-            </li>
-            <li role="presentation"><a href="#takeout" aria-controls="takeout" role="tab"
-                                       data-toggle="tab">Take out</a>
-            </li>
+            <nut-radio
+              v-model="wayOfTakingMeals"
+              :label="1"
+            >Eat in
+            </nut-radio>
+
+            <nut-radio
+              v-model="wayOfTakingMeals"
+              :label="2"
+            >Take out
+            </nut-radio>
           </ul>
           <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="eatin">
+            <div v-if="wayOfTakingMeals === 1" class="tab-pane active" id="eatin">
               <ul class="list-group">
                 <li class="list-group-item ">
                   <span class="damu-pay-infoName">Have you arrived?</span>
@@ -68,18 +104,18 @@
                   <span class="damu-pay-infoName">Table number</span>
                   <span class="damu-pay-info">13<button class="damu-pay-btn">></button></span>
                 </li>
-              </ul>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="takeout">
-              <ul class="list-group">
                 <li class="list-group-item ">
-                  <span class="damu-pay-infoName">Package fee:</span>
-                  <span class="damu-pay-info">10p</span>
+                  <span class="damu-pay-infoName">Payment method</span>
+                  <span class="damu-pay-info">card<button class="damu-pay-btn">></button></span>
                 </li>
               </ul>
             </div>
           </div>
-          <ul class="list-group" style="margin-bottom: 60px;">
+          <ul v-if="wayOfTakingMeals === 2" class="list-group" style="margin-bottom: 60px;">
+            <li class="list-group-item ">
+              <span class="damu-pay-infoName">Package fee:</span>
+              <span class="damu-pay-info">10p</span>
+            </li>
             <li class="list-group-item ">
               <span class="damu-pay-infoName">Payment method</span>
               <span class="damu-pay-info">card<button class="damu-pay-btn">></button></span>
@@ -92,23 +128,125 @@
     <!-- 结算栏 -->
     <div class="panel panel-default damu-bottom-wrap">
       <div class="panel-body bottom-menu-include">
-        <div class="col-md-3 col-sm-3 col-xs-3 check-all-bottom bottom-menu">
-        </div>
         <div class="col-md-3 col-sm-3 col-xs-3 bottom-menu">
-          <span>Total:<span id="selectGoodsMoney">0.00</span></span>
+          <span>Total:<span id="selectGoodsMoney">{{ allinAll }}</span></span>
         </div>
-        <div class="col-md-3 col-sm-3 col-xs-3 bottom-menu">
-          <button class="btn"><span id="payMulty"><a href="../pages/pay.html">Pay</a></span></button>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-3 bottom-menu">
+        <div class="col-md-3 col-sm-3 col-xs-3 bottom-menu" style="float: right">
+          <button class="btn"><span id="payMulty"><a @click="createOrder">Make Order</a></span></button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+  import axios from 'axios';
+
   export default {
     name: 'Pay',
-    components: {}
+    props: {
+      foodInCart: {
+        type: Array,
+        default: () => [],
+      },
+      changeTab: {
+        type: Function,
+        default: () => () => {},
+      },
+      getOrders: {
+        type: Function,
+        default: () => () => {},
+      },
+      clearCart: {
+        type: Function,
+        default: () => () => {},
+      },
+    },
+    data() {
+      return {
+        wayOfTakingMeals: 1,
+        user: {},
+        endDateShow: false,
+        pickUptimeShow: false,
+        startDateShow: false,
+        time: '12:00',
+        startDate: '',
+        endDate: '',
+        defaultDate: '2020-01-01',
+      };
+    },
+    computed: {
+      allinAll() {
+        let total = 0;
+
+        this.foodInCart.forEach(({ count, price }) => {
+          total += count * price;
+        });
+
+        let day = 1;
+        if (this.endDate && this.endDate) {
+          const during = new Date(`${this.endDate}`).getTime() - new Date(`${this.startDate}`).getTime();
+          day = during / (24 * 60 * 60 * 1000);
+          day = day === 0 ? 1 : day;
+        }
+
+        return (total * day).toFixed(2);
+      }
+    },
+    mounted() {
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.defaultDate = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`;
+    },
+    methods: {
+      switchEndDateShow() {
+        this.endDateShow = !this.endDateShow;
+      },
+      switchPickUptime() {
+        this.pickUptimeShow = !this.pickUptimeShow;
+      },
+      switchStartTime() {
+        this.startDateShow = !this.startDateShow;
+      },
+      switchStartDateShow() {
+        this.startDateShow = !this.startDateShow;
+      },
+      startChoose([y, m, d, ymd]) {
+        this.startDate = ymd;
+      },
+      endChoose([y, m, d, ymd]) {
+        this.endDate = ymd;
+      },
+      timeChoosed([h, m, hm]) {
+        this.time = hm;
+      },
+      createOrder() {
+        const during = new Date(`${this.endDate}`).getTime() - new Date(`${this.startDate}`).getTime();
+        const day = during / (24 * 60 * 60 * 1000);
+
+        let arr = [];
+        for (let i = 0; i <= day; i++) {
+          const timpStamp = new Date(`${this.startDate} ${this.time}`).getTime() + i * 24 * 60 * 60 * 1000;
+          arr.push(new Date(timpStamp));
+        }
+
+        const param = arr.map((mDate) => {
+          return {
+            price: this.allinAll,
+            orderTime: new Date(),
+            mealTime: mDate,
+            wayOfTakingMeals: this.wayOfTakingMeals,
+            status: 'making',
+            guest: this.user._id,
+            goods: this.foodInCart.map(({ _id }) => _id),
+          };
+        });
+
+        axios.post('/order', param)
+          .then(() => {
+            this.clearCart();
+            this.getOrders();
+            this.changeTab('Order');
+          })
+      },
+    }
   }
 </script>

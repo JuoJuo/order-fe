@@ -9,34 +9,34 @@
           <form>
             <div class="form-group">
               <label class="damu_input_label">
-                <i class="fa fa-user"></i>
+                <i class="glyphicon glyphicon-user"></i>
               </label>
-              <input class="damu_input_field" type="text" placeholder="Phone number">
+              <input class="damu_input_field" type="text" v-model="phone" placeholder="Phone number">
             </div>
             <div class="form-group">
               <label class="damu_input_label">
-                <i class="fa fa-lock"></i>
+                <i class="glyphicon glyphicon-lock"></i>
               </label>
-              <input class="damu_input_field" type="password" placeholder="Password">
+              <input class="damu_input_field" type="password" v-model="password" placeholder="Password">
             </div>
-            <div class="form-group">
+<!--            <div class="form-group">
               <label class="damu-checkbox-wrap">
                 <input name="signup_agree_checkbox" value="1" type="checkbox">
                 <a>Remember the password</a>
                 <span class="checkmark"></span>
               </label>
-            </div>
+            </div>-->
             <div class="damu-button-wrap">
-              <a href="../index.html">
-                <button class="btn  btn-default damu-form-button" type="button">Login</button>
+              <a>
+                <button class="btn btn-default damu-form-button" type="button" @click="login">Login</button>
               </a>
             </div>
             <div class="form-group">
               <label class=" label-content-color custom-form-label2">
-                <a href="register.vue">Register</a>
+                <a @click="gotoRegister">Register</a>
               </label>
               <label class=" label-content-color custom-form-label2">
-                <a href="resetPassword.vue">Forgot password?</a>
+                <a @click="gotoReset">Forgot password?</a>
               </label>
             </div>
           </form>
@@ -48,9 +48,39 @@
   </div>
 </template>
 <script>
+  import axios from 'axios';
+
   export default {
     name: 'Login',
-    components: {
-    }
+    data() {
+      return {
+        phone: '',
+        password: '',
+      };
+    },
+    methods: {
+      gotoRegister() {
+        this.$router.push({ name: 'register' })
+      },
+      gotoReset() {
+        this.$router.push({ name: 'resetPassword' })
+      },
+      login() {
+        const param = {
+          phone: this.phone,
+          password: this.password,
+        };
+        axios.post('/guest/login', param)
+          .then(({ data }) => {
+            if (data.length !== 0) {
+              localStorage.clear();
+              localStorage.setItem('user', JSON.stringify(data[0]));
+              this.$router.push({ name: 'index' });
+            } else {
+              alert('login failed, check your phone or password!');
+            }
+          })
+      }
+    },
   }
 </script>

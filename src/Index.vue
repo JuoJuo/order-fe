@@ -27,33 +27,54 @@
       </div><!-- /.container -->
     </nav>
 
-    <!--<Cart></Cart>-->
-    <!--<order></order>-->
-    <!--<myAccount></myAccount>-->
-    <!--<pay></pay>-->
-    <MyMenu></MyMenu>
+    <pay v-if="currentTab === 'Pay'"
+         :foodInCart="foodInCart"
+         :changeTab="changeTab"
+         :getOrders="getOrders"
+         :clearCart="clearCart"
+    ></pay>
+    <Cart v-show="currentTab === 'Cart'"
+          :changeTab="changeTab"
+          :removeFromCart="removeFromCart"
+          :foodInCart="foodInCart"
+    ></Cart>
+    <order v-if="currentTab === 'Order'" :orders="orders"></order>
+    <myAccount v-if="currentTab === 'My'"></myAccount>
+    <MyMenu v-if="currentTab === 'Menu'"
+            :goods="goods"
+            :comments="comments"
+            :getComments="getComments"
+            :foodInCart="foodInCart"
+            :addToCart="addToCart"
+    ></MyMenu>
 
     <!-- 底部导航栏 -->
     <nav class="navbar navbar-inverse navbar-fixed-bottom ">
       <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
           <div class="col-md-3 col-sm-3 col-xs-3 damu-bottomNav">
-            <a href="#Menu">Menu
+            <a @click="changeTab('Menu')">Menu
               <span class="glyphicon glyphicon-list-alt"></span>
             </a>
           </div>
           <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
-            <a href="pages/order.vue">Order
+            <a @click="changeTab('Order')">Order
               <span class="glyphicon glyphicon-book"></span>
             </a>
           </div>
           <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
-            <a href="pages/cart.vue">Cart
-              <span class="glyphicon glyphicon-shopping-cart"></span>
-            </a>
+            <nut-badge
+              :value="total"
+              class="item"
+            >
+              <a @click="changeTab('Cart')">
+                Cart
+                <span class="glyphicon glyphicon-shopping-cart"></span>
+              </a>
+            </nut-badge>
           </div>
           <div class="col-md-3  col-sm-3 col-xs-3 damu-bottomNav">
-            <a href="pages/myAccount.vue">My
+            <a @click="changeTab('My')">My
               <span class="glyphicon glyphicon-user"></span>
             </a>
           </div>
@@ -69,14 +90,83 @@
   import order from './pages/order';
   import pay from './pages/pay';
   import MyMenu from './pages/menu';
-export default {
-  name: 'App',
-  components: {
-    Cart,
-    myAccount,
-    order,
-    pay,
-    MyMenu,
+  import axios from 'axios';
+
+  export default {
+    name: 'Index',
+    components: {
+      Cart,
+      myAccount,
+      order,
+      pay,
+      MyMenu,
+    },
+    data() {
+      return {
+        currentTab: 'Menu',
+        goods: [],
+        comments: [],
+        foodInCart: [],
+        orders: [],
+      };
+    },
+    computed: {
+      total() {
+        const arr = this.foodInCart.map(({ count }) => count);
+
+        return arr.reduce((t, next) => {
+          t += next;
+          return t;
+        }, 0);
+      }
+    },
+    mounted() {
+      this.getGoods();
+      this.getComments();
+      this.getOrders();
+    },
+    methods: {
+      addToCart(item) {
+        const newItem = {
+          ...item,
+          count: 1,
+        };
+
+        const arr =this.foodInCart.filter(({ _id }) => _id === item._id);
+
+        if (arr.length !== 0) {
+          arr[0].count = arr[0].count + 1;
+        } else {
+          this.foodInCart.push(newItem);
+        }
+      },
+      clearCart() {
+        this.foodInCart = [];
+      },
+      removeFromCart(f) {
+        this.foodInCart = this.foodInCart.filter(({ _id }) => _id !== f._id);
+      },
+      changeTab(current) {
+        this.currentTab = current;
+      },
+      getGoods() {
+        axios.get('/goods')
+          .then(({ data }) => {
+            this.goods = data;
+          });
+      },
+      getComments() {
+        axios.get('/comments')
+          .then(({ data }) => {
+            this.comments = data;
+          });
+      },
+      getOrders() {
+        axios.get('/order')
+          .then(({ data }) => {
+            this.orders = data;
+          });
+      },
+    },
   }
-}
 </script>
