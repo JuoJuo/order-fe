@@ -7,7 +7,8 @@
 <script>
 export default {
   name: 'App',
-  components: {
-  }
+  mounted() {
+    window.__router = this.$router;
+  },
 }
 </script>

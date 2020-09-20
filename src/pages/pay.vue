@@ -80,7 +80,7 @@
               </nut-datepicker>
             </li>
           </ul>
-          <span>How to take meals?</span>
+<!--          <span>How to take meals?</span>
           <ul class="nav nav-tabs" role="tablist">
             <nut-radio
               v-model="wayOfTakingMeals"
@@ -120,7 +120,7 @@
               <span class="damu-pay-infoName">Payment method</span>
               <span class="damu-pay-info">card<button class="damu-pay-btn">></button></span>
             </li>
-          </ul>
+          </ul>-->
         </div>
         <div class="col-md-3 col-sm-3 col-xs-1"></div>
       </div>
@@ -139,7 +139,7 @@
   </div>
 </template>
 <script>
-  import axios from 'axios';
+  import axios from '../api';
 
   export default {
     name: 'Pay',

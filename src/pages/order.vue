@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <img src="../images/burger2.jpg" class="damu-order-img">
+                    <img :src="o.goods[0].url" class="damu-order-img">
                   </td>
                   <td>{{ o.price }}</td>
                   <td><span style="color: darkseagreen">{{ o.status }}</span></td>

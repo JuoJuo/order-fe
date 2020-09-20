@@ -19,9 +19,8 @@
           <ul class="nav navbar-nav">
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="index.html">Home<span class="sr-only">(current)</span></a></li>
-            <li><a href="pages/login.vue">Login</a></li>
-            <li><a href="pages/register.vue">Register</a></li>
+            <li class="active"><a @click="() => currentTab = 'Menu'">Home<span class="sr-only">(current)</span></a></li>
+            <li><a @click="logout">Login out</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
@@ -90,7 +89,7 @@
   import order from './pages/order';
   import pay from './pages/pay';
   import MyMenu from './pages/menu';
-  import axios from 'axios';
+  import axios from './api';
 
   export default {
     name: 'Index',
@@ -126,6 +125,10 @@
       this.getOrders();
     },
     methods: {
+      logout() {
+        axios.post('/logoutGuest');
+        this.$router.push({ name: 'login' });
+      },
       addToCart(item) {
         const newItem = {
           ...item,

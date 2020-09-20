@@ -18,7 +18,7 @@
             </tr>
             <tr v-for="f in foodInCart">
               <td>
-                <img src="../images/burger2.jpg" class="damu-order-img">
+                <img :src="f.url" class="damu-order-img">
               </td>
               <td><span class="btn-group btn-group-sm">
                     <button type="button" class="btn btn-default" @click="() => f.count = f.count + 1">+</button>

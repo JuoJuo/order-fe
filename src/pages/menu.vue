@@ -58,7 +58,7 @@
             <div class="row">
               <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3" style="padding-left: 0;height: calc(100vh - 340px)">
                 <div class="list-group" id="Menu1">
-                  <a @click="changeSubTab('Single')" class="list-group-item" :class="tabName ==='Single' ? 'active' : ''">Single item</a>
+                  <a @click="changeSubTab('Single item')" class="list-group-item" :class="tabName ==='Single item' ? 'active' : ''">Single item</a>
                   <a @click="changeSubTab('Meal')" href="#" class="list-group-item" :class="tabName ==='Meal' ? 'active' : ''">Meal</a>
                   <a @click="changeSubTab('Snack')" href="#" class="list-group-item" :class="tabName ==='Snack' ? 'active' : ''">Snack</a>
                   <a @click="changeSubTab('Drinks')" href="#" class="list-group-item" :class="tabName ==='Drinks' ? 'active' : ''">Drinks</a>
@@ -67,7 +67,7 @@
               <template v-for="g in filteredGoods">
                 <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
                   <a href="#">
-                    <img src="../images/burger2.jpg" class="damu-img">
+                    <img :src="g.url" class="damu-img">
                   </a>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6">
@@ -116,7 +116,7 @@
   </div>
 </template>
 <script>
-  import axios from 'axios';
+  import axios from '../api';
 
   export default {
     name: 'Menu',
@@ -144,7 +144,7 @@
     },
     data() {
       return {
-        tabName: 'Single',
+        tabName: 'Single item',
         myComment: '',
         show: false,
         currentGoods: {},
