@@ -38,7 +38,7 @@
           :foodInCart="foodInCart"
     ></Cart>
     <order v-if="currentTab === 'Order'" :orders="orders"></order>
-    <myAccount v-if="currentTab === 'My'"></myAccount>
+    <myAccount v-if="currentTab === 'My'" :logout22="logout"></myAccount>
     <MyMenu v-if="currentTab === 'Menu'"
             :goods="goods"
             :comments="comments"
