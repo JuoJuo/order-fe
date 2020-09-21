@@ -8,12 +8,12 @@
     <div>
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active">
+        <li role="presentation" :class="currentStatusTab === 'All' ? 'active' : ''">
           <a @click="changeCurrentTab('All')">All</a>
         </li>
-        
+
         <template v-for="s in getOrderStatus">
-          <li role="presentation" class="active">
+          <li role="presentation" :class="currentStatusTab === s ? 'active' : ''">
             <a @click="changeCurrentTab(s)">
               {{ s }}
             </a>

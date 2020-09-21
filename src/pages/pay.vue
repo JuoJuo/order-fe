@@ -35,6 +35,7 @@
                 :is-visible="pickUptimeShow"
                 type="time"
                 title="Please Choose Time"
+                :isShowChinese="false"
                 @close="switchPickUptime()"
                 @choose="timeChoosed"
                 defaultValue="01:07"
