@@ -19,8 +19,9 @@
           <ul class="nav navbar-nav">
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li><a>Hello: {{ user.username }}</a></li>
             <li class="active"><a @click="() => currentTab = 'Menu'">Home<span class="sr-only">(current)</span></a></li>
-            <li><a @click="logout">Login out</a></li>
+            <li><a @click="logout">Logout</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
@@ -37,7 +38,7 @@
           :removeFromCart="removeFromCart"
           :foodInCart="foodInCart"
     ></Cart>
-    <order v-if="currentTab === 'Order'" :orders="orders"></order>
+    <order v-if="currentTab === 'Order'" :orders="orders" :getOrders="getOrders"></order>
     <myAccount v-if="currentTab === 'My'" :logout22="logout"></myAccount>
     <MyMenu v-if="currentTab === 'Menu'"
             :goods="goods"
@@ -107,6 +108,7 @@
         comments: [],
         foodInCart: [],
         orders: [],
+        user: {},
       };
     },
     computed: {
@@ -120,6 +122,7 @@
       }
     },
     mounted() {
+      this.user = JSON.parse(localStorage.getItem('user'));
       this.getGoods();
       this.getComments();
       this.getOrders();

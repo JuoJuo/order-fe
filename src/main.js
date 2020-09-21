@@ -11,8 +11,6 @@ import router from './router';
 
 Vue.config.productionTip = false;
 
-NutUI.install(Vue);
-
 Vue.use(NutUI, {
   locale: 'en-US',
   lang: enUS

@@ -80,47 +80,6 @@
               </nut-datepicker>
             </li>
           </ul>
-<!--          <span>How to take meals?</span>
-          <ul class="nav nav-tabs" role="tablist">
-            <nut-radio
-              v-model="wayOfTakingMeals"
-              :label="1"
-            >Eat in
-            </nut-radio>
-
-            <nut-radio
-              v-model="wayOfTakingMeals"
-              :label="2"
-            >Take out
-            </nut-radio>
-          </ul>
-          <div class="tab-content">
-            <div v-if="wayOfTakingMeals === 1" class="tab-pane active" id="eatin">
-              <ul class="list-group">
-                <li class="list-group-item ">
-                  <span class="damu-pay-infoName">Have you arrived?</span>
-                </li>
-                <li class="list-group-item ">
-                  <span class="damu-pay-infoName">Table number</span>
-                  <span class="damu-pay-info">13<button class="damu-pay-btn">></button></span>
-                </li>
-                <li class="list-group-item ">
-                  <span class="damu-pay-infoName">Payment method</span>
-                  <span class="damu-pay-info">card<button class="damu-pay-btn">></button></span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <ul v-if="wayOfTakingMeals === 2" class="list-group" style="margin-bottom: 60px;">
-            <li class="list-group-item ">
-              <span class="damu-pay-infoName">Package fee:</span>
-              <span class="damu-pay-info">10p</span>
-            </li>
-            <li class="list-group-item ">
-              <span class="damu-pay-infoName">Payment method</span>
-              <span class="damu-pay-info">card<button class="damu-pay-btn">></button></span>
-            </li>
-          </ul>-->
         </div>
         <div class="col-md-3 col-sm-3 col-xs-1"></div>
       </div>
@@ -234,7 +193,7 @@
             orderTime: new Date(),
             mealTime: mDate,
             wayOfTakingMeals: this.wayOfTakingMeals,
-            status: 'making',
+            status: 'Confirming',
             guest: this.user._id,
             goods: this.foodInCart.map(({ _id }) => _id),
           };

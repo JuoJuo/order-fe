@@ -27,7 +27,14 @@
                     <img :src="o.goods[0].url" class="damu-order-img">
                   </td>
                   <td>{{ o.price }}</td>
-                  <td><span style="color: darkseagreen">{{ o.status }}</span></td>
+                  <td>
+                    <span :class="getColor(o)">{{ o.status }}</span><br>
+                    <nut-button
+                            @click="cancelOrder(o)"
+                            type="default" shape="circle" small v-if="o.status === 'Confirming'">
+                      Cancel
+                    </nut-button>
+                  </td>
                 </tr>
               </table>
               <div class="row">
@@ -58,18 +65,56 @@
   </div>
 </template>
 <script>
+  import axios from '../api';
   export default {
     name: 'Order',
     props: {
       orders: {
         type: Array,
         default: () => [],
-      }
+      },
+      getOrders: {
+        type: Function,
+        default: () => () => {},
+      },
     },
     methods: {
       getTxt(d) {
         return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
-      }
+      },
+      getColor(o) {
+        if (o.status === 'Confirming') {
+          return 'yellow';
+        }
+
+        if (o.status === 'Canceled') {
+          return 'red';
+        }
+
+        return 'green';
+      },
+      cancelOrder({ _id, status }) {
+        const params = {
+          _id,
+          status: 'Canceled',
+        };
+        axios.put('/order', params)
+          .then(() => {
+            this.getOrders();
+          })
+      },
     }
   }
 </script>
+
+<style>
+.green {
+  color: darkseagreen
+}
+.yellow {
+  color: #8e7d3e;
+}
+.red {
+  color: red;
+}
+</style>

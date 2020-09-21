@@ -58,10 +58,13 @@
             <div class="row">
               <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3" style="padding-left: 0;height: calc(100vh - 340px)">
                 <div class="list-group" id="Menu1">
-                  <a @click="changeSubTab('Single item')" class="list-group-item" :class="tabName ==='Single item' ? 'active' : ''">Single item</a>
-                  <a @click="changeSubTab('Meal')" href="#" class="list-group-item" :class="tabName ==='Meal' ? 'active' : ''">Meal</a>
-                  <a @click="changeSubTab('Snack')" href="#" class="list-group-item" :class="tabName ==='Snack' ? 'active' : ''">Snack</a>
-                  <a @click="changeSubTab('Drinks')" href="#" class="list-group-item" :class="tabName ==='Drinks' ? 'active' : ''">Drinks</a>
+                  <template v-for="type in goodsTypes">
+                    <a @click="changeSubTab(type)"
+                       class="list-group-item"
+                       :class="tabName === type ? 'active' : ''">
+                      {{ type }}
+                    </a>
+                  </template>
                 </div>
               </div>
               <template v-for="g in filteredGoods">
@@ -153,7 +156,11 @@
     computed:{
       filteredGoods() {
         return this.goods.filter(({ type }) => type === this.tabName || !type);
-      }
+      },
+      goodsTypes() {
+        const types = this.goods.map(({ type }) => type);
+        return new Set(types);
+      },
     },
     methods: {
       openComment(currentGoods){
