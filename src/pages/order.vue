@@ -8,14 +8,23 @@
     <div>
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab"
-                                                  data-toggle="tab">All</a></li>
+        <li role="presentation" class="active">
+          <a @click="changeCurrentTab('All')">All</a>
+        </li>
+        
+        <template v-for="s in getOrderStatus">
+          <li role="presentation" class="active">
+            <a @click="changeCurrentTab(s)">
+              {{ s }}
+            </a>
+          </li>
+        </template>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content" style="max-height: 420px;overflow: scroll">
         <div role="tabpanel" class="tab-pane active damu-order-tabpanel" id="unfinished">
           <div role="tabpanel" class="tab-pane">
-            <div class="damu-order-wrap" v-for="o in orders">
+            <div class="damu-order-wrap" v-for="o in currentOrder">
               <table class="table damu-table">
                 <tr>
                   <th>Goods</th>
@@ -78,7 +87,28 @@
         default: () => () => {},
       },
     },
+    computed: {
+      getOrderStatus() {
+        const s = this.orders.map(({ status }) => status);
+        return new Set(s);
+      },
+      currentOrder() {
+        if (this.currentStatusTab === 'All') {
+          return this.orders;
+        }
+
+        return this.orders.filter(({ status }) => status === this.currentStatusTab);
+      },
+    },
+    data() {
+      return {
+        currentStatusTab: 'All',
+      };
+    },
     methods: {
+      changeCurrentTab(s) {
+        this.currentStatusTab = s;
+      },
       getTxt(d) {
         return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
       },
