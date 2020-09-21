@@ -201,7 +201,10 @@
         });
 
         axios.post('/order', param)
-          .then(() => {
+          .then(({ data }) => {
+            if (data.code === "-1") {
+              return alert(data.msg);
+            }
             this.clearCart();
             this.getOrders();
             this.changeTab('Order');
