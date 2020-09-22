@@ -94,10 +94,10 @@
       },
       currentOrder() {
         if (this.currentStatusTab === 'All') {
-          return this.orders;
+          return this.orders.reverse();
         }
 
-        return this.orders.filter(({ status }) => status === this.currentStatusTab);
+        return this.orders.filter(({ status }) => status === this.currentStatusTab).reverse();
       },
     },
     data() {
@@ -128,7 +128,7 @@
           _id,
           status: 'Canceled',
         };
-        axios.put('/order', params)
+        axios.put('/api/order', params)
           .then(() => {
             this.getOrders();
           })

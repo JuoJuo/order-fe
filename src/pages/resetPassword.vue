@@ -69,7 +69,7 @@
           phone: this.phone,
           password: this.password,
         };
-        axios.put('/guest/resetPassword', param)
+        axios.put('/api/guest/resetPassword', param)
           .then(({ data }) => {
             if (typeof data !== 'string') {
               this.$router.push({ name: 'login' });

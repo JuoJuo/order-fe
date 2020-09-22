@@ -47,13 +47,6 @@
               <button class="btn  btn-default damu-form-button" type="button" @click="save">save</button>
             </div>
             <div class="damu-my-button-wrap">
-              <a @click="logout">
-                <button class="btn  btn-default damu-form-button" type="button">
-                  Switch account
-                </button>
-              </a>
-            </div>
-            <div class="damu-my-button-wrap">
               <button class="btn  btn-default damu-form-button" type="button" @click="logout">Log out</button>
             </div>
           </div>
@@ -100,7 +93,7 @@
           _id: this.user._id,
         };
 
-        axios.put('/guest', param).then(() => {
+        axios.put('/api/guest', param).then(() => {
           this.user.username = this.uname;
           this.isModify = false;
         });

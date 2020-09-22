@@ -129,7 +129,7 @@
     },
     methods: {
       logout() {
-        axios.post('/logoutGuest');
+        axios.post('/api/logoutGuest');
         this.$router.push({ name: 'login' });
       },
       addToCart(item) {
@@ -156,19 +156,19 @@
         this.currentTab = current;
       },
       getGoods() {
-        axios.get('/goods')
+        axios.get('/api/goods')
           .then(({ data }) => {
             this.goods = data;
           });
       },
       getComments() {
-        axios.get('/comments')
+        axios.get('/api/comments')
           .then(({ data }) => {
             this.comments = data;
           });
       },
       getOrders() {
-        axios.get('/order')
+        axios.get('/api/order')
           .then(({ data }) => {
             this.orders = data;
           });

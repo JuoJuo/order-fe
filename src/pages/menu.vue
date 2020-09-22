@@ -177,7 +177,7 @@
           guest: JSON.parse(localStorage.getItem('user'))._id,
           goods: this.currentGoods._id,
         };
-        axios.post('/comments', param)
+        axios.post('/api/comments', param)
           .then(() => {
             this.show = false;
             this.getComments();

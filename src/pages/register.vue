@@ -64,7 +64,7 @@
           phone: this.phone,
           password: this.password,
         };
-        axios.post('/guest', param)
+        axios.post('/api/guest', param)
           .then(({ data }) => {
             if (data._id) {
               alert('register success!');

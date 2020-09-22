@@ -70,7 +70,7 @@
           phone: this.phone,
           password: this.password,
         };
-        axios.post('/guest/login', param)
+        axios.post('/api/guest/login', param)
           .then(({ data }) => {
             if (data.length !== 0) {
               localStorage.clear();

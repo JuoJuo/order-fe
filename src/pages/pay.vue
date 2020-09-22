@@ -200,7 +200,7 @@
           };
         });
 
-        axios.post('/order', param)
+        axios.post('/api/order', param)
           .then(({ data }) => {
             if (data.code === "-1") {
               return alert(data.msg);
