@@ -19,5 +19,5 @@ app.use(express.static(dir));
 app.use(fallback('index.html', { root: dir }));
 
 app.listen(8080, () => {
-  console.log('http://localhost:8080');
+  console.log('http://localhost:8080/login');
 });
