@@ -16,6 +16,7 @@ const config = {
   changeOrigin: true
 };
 app.use('/api', createProxyMiddleware(config));
+app.use('/pic', createProxyMiddleware(config));
 
 app.use(express.static(dir));
 app.use(fallback('index.html', { root: dir }));
