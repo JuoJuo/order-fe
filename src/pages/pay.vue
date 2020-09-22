@@ -80,6 +80,21 @@
               >
               </nut-datepicker>
             </li>
+
+            <li class="list-group-item ">
+              <span class="damu-pay-infoName">Pay Method</span>
+              <span class="damu-pay-info">
+                <a @click.stop="isVisible = true">Choose Pay Method</a>
+                <span style="margin-left: 8px;">{{ payMethod }}</span>
+                <nut-picker
+                        :is-visible="isVisible"
+                        :list-data="[[{ label: 1,value: 'WeChat Pay'}, { label: 2,value: 'AliPay'}, { label: 3,value: 'Card'}]]"
+                        @close="isVisible = false"
+                        @confirm="confirm"
+                ></nut-picker>
+              </span>
+
+            </li>
           </ul>
         </div>
         <div class="col-md-3 col-sm-3 col-xs-1"></div>
@@ -125,6 +140,8 @@
       return {
         wayOfTakingMeals: 1,
         user: {},
+        isVisible: false,
+        payMethod: 'Card',
         endDateShow: false,
         pickUptimeShow: false,
         startDateShow: false,
@@ -157,6 +174,9 @@
       this.defaultDate = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`;
     },
     methods: {
+      confirm([{ value = 'Card' }]) {
+        this.payMethod = value;
+      },
       switchEndDateShow() {
         this.endDateShow = !this.endDateShow;
       },

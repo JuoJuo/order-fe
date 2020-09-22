@@ -19,13 +19,6 @@
               </label>
               <input class="damu_input_field" type="password" v-model="password" placeholder="Password">
             </div>
-<!--            <div class="form-group">
-              <label class="damu-checkbox-wrap">
-                <input name="signup_agree_checkbox" value="1" type="checkbox">
-                <a>Remember the password</a>
-                <span class="checkmark"></span>
-              </label>
-            </div>-->
             <div class="damu-button-wrap">
               <a>
                 <button class="btn btn-default damu-form-button" type="button" @click="login">Login</button>
