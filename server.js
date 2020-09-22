@@ -1,15 +1,23 @@
 const express = require('express');
 const fallback = require('express-history-api-fallback');
-const { createProxyMiddleware } = require('http-proxy-middleware');
 const path = require("path");
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 const dir = path.resolve(__dirname, './dist');
+
+
+
+
+const config = {
+  target: 'http://localhost:3023',
+  changeOrigin: true
+};
+app.use('/api', createProxyMiddleware(config));
+
 app.use(express.static(dir));
 app.use(fallback('index.html', { root: dir }));
 
-app.use('/api', createProxyMiddleware({ target: 'http://www.example.org', changeOrigin: true }));
-
-app.listen(9999, () => {
-  console.log('http://localhost:9999');
+app.listen(8080, () => {
+  console.log('http://localhost:8080');
 });
