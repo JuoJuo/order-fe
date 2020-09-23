@@ -65,13 +65,12 @@
         };
         axios.post('/api/guest/login', param)
           .then(({ data }) => {
-            if (data.length !== 0) {
-              localStorage.clear();
-              localStorage.setItem('user', JSON.stringify(data[0]));
-              this.$router.push({ name: 'index' });
-            } else {
-              alert('login failed, check your phone or password!');
-            }
+            localStorage.clear();
+            localStorage.setItem('user', JSON.stringify(data[0]));
+            this.$router.push({ name: 'index' });
+          })
+          .catch(() => {
+            alert('login failed, check your phone or password!');
           })
       }
     },

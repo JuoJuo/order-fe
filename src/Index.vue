@@ -168,7 +168,10 @@
           });
       },
       getOrders() {
-        axios.get('/api/order')
+        const params = {
+          guest: this.user._id,
+        };
+        axios.get('/api/order', { params: params })
           .then(({ data }) => {
             this.orders = data;
           });
