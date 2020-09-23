@@ -181,19 +181,24 @@
           });
       },
       checkOrderTime() {
-        this.getOrders();
-        this.orders.forEach(({ mealTime, goods }) => {
-          const now = new Date().getTime();
-          const meal = new Date(mealTime).getTime();
+        const params = {
+          guest: this.user._id,
+        };
+        axios.get('/api/order', { params: params })
+          .then(({ data }) => {
+            data.forEach(({ mealTime, goods }) => {
+              const now = new Date().getTime();
+              const meal = new Date(mealTime).getTime();
 
-          this.$notify.setDefaultOptions({
-            duration: 10 * 1000
+              this.$notify.setDefaultOptions({
+                duration: 10 * 1000
+              });
+              if (now >= meal) {
+                const notificationTxt = `Please remember to take your ${goods[0].name}!`;
+                this.$notify.success( notificationTxt);
+              }
+            });
           });
-          if (now >= meal) {
-            const notificationTxt = `Please remember to take your ${goods[0].name}!`;
-            this.$notify.success( notificationTxt);
-          }
-        });
       }
     },
   }
