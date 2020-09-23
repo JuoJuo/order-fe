@@ -122,10 +122,14 @@
       }
     },
     mounted() {
+      this.timer = setInterval(() => this.checkOrderTime(), 30 * 1000);
       this.user = JSON.parse(localStorage.getItem('user'));
       this.getGoods();
       this.getComments();
       this.getOrders();
+    },
+    beforeDestroy() {
+      clearInterval(this.timer);
     },
     methods: {
       logout() {
@@ -176,6 +180,21 @@
             this.orders = data;
           });
       },
+      checkOrderTime() {
+        this.getOrders();
+        this.orders.forEach(({ mealTime, goods }) => {
+          const now = new Date().getTime();
+          const meal = new Date(mealTime).getTime();
+
+          this.$notify.setDefaultOptions({
+            duration: 10 * 1000
+          });
+          if (now >= meal) {
+            const notificationTxt = `Please remember to take your ${goods[0].name}!`;
+            this.$notify.success( notificationTxt);
+          }
+        });
+      }
     },
   }
 </script>
