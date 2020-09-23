@@ -186,14 +186,14 @@
         };
         axios.get('/api/order', { params: params })
           .then(({ data }) => {
-            data.forEach(({ mealTime, goods }) => {
+            data.forEach(({ mealTime, goods, status }) => {
               const now = new Date().getTime();
               const meal = new Date(mealTime).getTime();
 
               this.$notify.setDefaultOptions({
                 duration: 10 * 1000
               });
-              if (now >= meal) {
+              if (now >= meal && status === 'Completed') {
                 const notificationTxt = `Please remember to take your ${goods[0].name}!`;
                 this.$notify.success( notificationTxt);
               }
