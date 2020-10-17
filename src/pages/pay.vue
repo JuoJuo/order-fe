@@ -93,7 +93,20 @@
                         @confirm="confirm"
                 ></nut-picker>
               </span>
+            </li>
 
+            <li class="list-group-item ">
+              <span class="damu-pay-infoName">Pay Method</span>
+              <span class="damu-pay-info">
+                <a @click.stop="isVisibleEat = true">Choose Eat Type</a>
+                <span style="margin-left: 8px;">{{ wayOfTakingMeals }}</span>
+                <nut-picker
+                  :is-visible="isVisibleEat"
+                  :list-data="[[{ label: 1,value: 'Pick up at store'}, { label: 2,value: 'Eat at restaurant'}]]"
+                  @close="isVisibleEat = false"
+                  @confirm="confirm2"
+                ></nut-picker>
+              </span>
             </li>
           </ul>
         </div>
@@ -138,7 +151,7 @@
     },
     data() {
       return {
-        wayOfTakingMeals: 1,
+        wayOfTakingMeals: 'Pick up at store',
         user: {},
         isVisible: false,
         payMethod: 'Card',
@@ -149,6 +162,7 @@
         startDate: '',
         endDate: '',
         defaultDate: '2020-01-01',
+        isVisibleEat: false,
       };
     },
     computed: {
@@ -176,6 +190,9 @@
     methods: {
       confirm([{ value = 'Card' }]) {
         this.payMethod = value;
+      },
+      confirm2([{ value = 'Pick up at store' }]) {
+        this.wayOfTakingMeals = value;
       },
       switchEndDateShow() {
         this.endDateShow = !this.endDateShow;

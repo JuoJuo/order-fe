@@ -62,6 +62,10 @@
                       <span class="damu-my-infoName">Scheduled pick-up time</span>
                       <span class="damu-my-info">{{ getTxt(new Date(o.mealTime)) }}</span>
                     </li>
+                    <li class="list-group-item ">
+                      <span class="damu-my-infoName">Eating Type</span>
+                      <span class="damu-my-info">{{ o.wayOfTakingMeals }}</span>
+                    </li>
                   </ul>
                 </div>
                 <div class="col-md-3 col-xs-1"></div>
